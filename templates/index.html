@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}CivicShield AI | Home{% endblock %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">SMARTER CIVIC REPORTING</p>
+  <h1>Help make public spaces safer.</h1>
+  <p>Report infrastructure problems, keep track of submissions, and help reviewers understand issues in your community.</p>
+  <div class="actions">
+    <a class="button" href="{{ url_for('report') }}">Report an Issue</a>
+    <a class="button secondary" href="{{ url_for('reports') }}">View Reports</a>
+  </div>
+</section>
+<section class="section">
+  <h2>Issues you can report</h2>
+  <div class="cards">
+    {% for category in categories %}
+      <article class="card"><span class="card-icon">📍</span><h3>{{ category }}</h3></article>
+    {% endfor %}
+  </div>
+</section>
+<section class="notice">
+  <strong>Prototype notice:</strong> Reports are stored in a local development database. Do not submit sensitive personal information. Reports are not automatically sent to a municipal authority.
+</section>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}View Reports | CivicShield AI{% endblock %}
+{% block content %}
+<section class="page-heading">
+  <p class="eyebrow">COMMUNITY REPORTS</p>
+  <h1>Submitted reports</h1>
+  <p>{{ reports|length }} report(s) currently stored in this prototype database.</p>
+</section>
+{% if reports %}
+  <div class="report-list">
+    {% for item in reports %}
+      <article class="report-card">
+        <div class="report-top">
+          <span class="report-code">{{ item["report_code"] }}</span>
+          <span class="status">{{ item["status"] }}</span>
+        </div>
+        <h2>{{ item["category"] }}</h2>
+        <p>{{ item["description"] }}</p>
+        <p class="meta"><strong>Language:</strong> {{ item["language"] }} · <strong>Location:</strong> {{ item["location"] }}</p>
+        {% if item["image_filename"] %}
+          <img class="report-image" src="{{ url_for('static', filename='uploads/' + item['image_filename']) }}" alt="Photo submitted with report">
+        {% endif %}
+        <p class="meta">Submitted: {{ item["created_at"] }}</p>
+      </article>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="empty-state">
+    <h2>No reports yet</h2>
+    <p>Submit a test report to see it appear here.</p>
+    <a class="button" href="{{ url_for('report') }}">Create First Report</a>
+  </div>
+{% endif %}
+{% endblock %}

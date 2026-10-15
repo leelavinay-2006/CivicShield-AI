@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Report an Issue | CivicShield AI{% endblock %}
+{% block content %}
+<section class="page-heading">
+  <p class="eyebrow">CITIZEN REPORTING</p>
+  <h1>Report a public issue</h1>
+  <p>Provide enough information for a reviewer to understand the problem.</p>
+</section>
+<form class="form-card" method="post" enctype="multipart/form-data" action="{{ url_for('report') }}">
+  <label for="category">Issue category *</label>
+  <select id="category" name="category" required>
+    <option value="">Choose a category</option>
+    {% for category in categories %}
+      <option value="{{ category }}">{{ category }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="description">Description *</label>
+  <textarea id="description" name="description" rows="4" minlength="5" maxlength="1500" required placeholder="Example: A large pothole is near the public bus stop."></textarea>
+
+  <label for="language">Complaint language *</label>
+  <select id="language" name="language" required>
+    <option value="English">English</option>
+    <option value="Telugu">Telugu</option>
+    <option value="Hindi">Hindi</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <label for="location">General location *</label>
+  <input id="location" name="location" maxlength="250" required placeholder="Example: Near the main bus stop, Tirupati">
+
+  <label for="image">Photo (optional; PNG/JPG/WEBP, max 5 MB)</label>
+  <input id="image" name="image" type="file" accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp">
+
+  <button class="button" type="submit">Submit Report</button>
+  <p class="helper">Please avoid uploading faces, vehicle number plates, or private information.</p>
+</form>
+{% endblock %}
